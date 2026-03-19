@@ -17,3 +17,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/image.jpg
+  fonts:
+    - family: Mifuente
+      fonts:
+        - asset: assets/fonts/Roboto_Condensed/RobotoCondensed-VariableFont_wght.ttf
