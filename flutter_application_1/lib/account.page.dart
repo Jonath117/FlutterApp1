@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 
-class MyAccountPage extends StatelessWidget {
+class MyAccountPage extends StatefulWidget {
   static String path = '/account';
 
   const MyAccountPage({super.key});
+
+  @override
+  State<MyAccountPage> createState() => _MyAccountPageState();
+}
+
+class _MyAccountPageState extends State<MyAccountPage> {
+  bool showData = true;
+  final String chars = '*******';
+  final String cardChars = '**** **** **** ****';
 
   @override
   Widget build(BuildContext context) {
@@ -45,11 +54,11 @@ class MyAccountPage extends StatelessWidget {
             ),
 
             Text(
-              'Cuenta: ${info['accountNumber'] ?? 'N/A'}',
+              'Cuenta: ${showData ? info['accountNumber'] ?? 'N/A' : chars}',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
             Text(
-              'Saldo: ${info['CurrentBalance'] ?? 'N/A'} bs',
+              'Saldo: ${showData ? info['CurrentBalance'] ?? 'N/A' : chars} bs',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
 
@@ -58,7 +67,7 @@ class MyAccountPage extends StatelessWidget {
               children: [
                 Icon(Icons.credit_card),
                 Text(
-                  'Numero de Tarjeta: ${info['cardNumber'] ?? 'N/A'}',
+                  'Numero de Tarjeta: ${showData ? info['cardNumber'] ?? 'N/A' : cardChars}',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ],
@@ -86,6 +95,17 @@ class MyAccountPage extends StatelessWidget {
                   ),
                 ],
               ),
+
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  showData = !showData;
+                });
+              },
+              child: Text(
+                '${showData ? 'Ocultar' : 'Mostrar'} datos sensibles',
+              ),
+            ),
 
             ElevatedButton(
               onPressed: () {
